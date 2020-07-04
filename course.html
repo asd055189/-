@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>元智抓課小幫手</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		$("#myform").submit(function(e){
+			e.preventDefault()
+					for(var i=1;i<=42;i++)
+						if($("input")[i].checked==true)
+							data=$("input")[i].value
+					var email = $('#email').val();
+					senddata(email)
+				});
+		})
+		function senddata(e){
+			$.ajax({
+					  type: "post",
+					  url: "course.php",
+					  data: "class="+data+"&email="+e
+					})
+					.success(function(data) {
+					    $("a#result")[0].innerHTML=data;
+					    setTimeout( 
+					    	function(){
+						    	senddata(e)
+					    	}
+					    , 180000) 
+					 })
+		}
+	</script>		
+</head>
+<body>
+
+			<p align="center">result: <a id="result" ></span></p>
+
+		<form action="" method="" id="myform">
+							email
+<input type="text" name="email" id ="email">
+<br><input name="class "type ="radio" id="class" value="CS106 A">程式設計（一）	周志岳(Chih-Yueh Chou)
+<br><input name="class "type ="radio" id="class" value="CS107 A">離散數學	許大偉
+<br><input name="class "type ="radio" id="class" value="CS107 B">離散數學	張經略
+<br><input name="class "type ="radio" id="class" value="CS114 A">程式設計（二）	林基成(Ji-Cherng Lin)
+<br><input name="class "type ="radio" id="class" value="CS114 B">程式設計（二）	葉奕成(I-CHENG YEH)
+<br><input name="class "type ="radio" id="class" value="CS140 A">資訊概論	姚修慎(Hsiu-Hsen Yao)
+<br><input name="class "type ="radio" id="class" value="CS147 A">微積分（一）	游逸哲
+<br><input name="class "type ="radio" id="class" value="CS148 A">微積分（二）	黃依賢(I-Shyan Hwang)
+<br><input name="class "type ="radio" id="class" value="CS151 A">網站程式設計實務	鐘祥仁
+<br><input name="class "type ="radio" id="class" value="CS152 A">普通物理	廖原煌(Yuan-Hwang Liao)
+<br><input name="class "type ="radio" id="class" value="CS153 A">電子電路學	陳勇志(Yung-Chih Chen)
+<br><input name="class "type ="radio" id="class" value="CS153 B">電子電路學	曾王道(Wang-Dauh Tseng)
+<br><input name="class "type ="radio" id="class" value="CS203 A">資料結構	陳增益
+<br><input name="class "type ="radio" id="class" value="CS213 A">電子電路實驗	陳增益
+<br><input name="class "type ="radio" id="class" value="CS213 B">電子電路實驗	陳勇志(Yung-Chih Chen)
+<br><input name="class "type ="radio" id="class" value="CS213 C">電子電路實驗	陳彥安
+<br><input name="class "type ="radio" id="class" value="CS222 A">程式語言	范金鳳(Chin-Feng Fan)
+<br><input name="class "type ="radio" id="class" value="CS226 A">機率與統計	黃毅然(Yieh-Ran Haung)
+<br><input name="class "type ="radio" id="class" value="CS226 B">機率與統計	蔡侑庭(YU-TING TSAI)
+<br><input name="class "type ="radio" id="class" value="CS229 A">資料通訊概論	黃依賢(I-Shyan Hwang)
+<br><input name="class "type ="radio" id="class" value="CS233 A">線性代數	林啟芳(Chi-Fang Lin)
+<br><input name="class "type ="radio" id="class" value="CS250 A">組合語言與計算機組織	陳昱圻
+<br><input name="class "type ="radio" id="class" value="CS250 B">組合語言與計算機組織	陳勇志(Yung-Chih Chen)
+<br><input name="class "type ="radio" id="class" value="CS255 A">數位系統實驗（二）	陳增益
+<br><input name="class "type ="radio" id="class" value="CS255 B">數位系統實驗（二）	陳勇志(Yung-Chih Chen)
+<br><input name="class "type ="radio" id="class" value="CS255 C">數位系統實驗（二）	陳彥安
+<br><input name="class "type ="radio" id="class" value="CS303 A">Ｊａｖａ概論	歐昱言(Yu-Yen Ou)
+<br><input name="class "type ="radio" id="class" value="CS305 A">作業系統概論	楊正仁(Cheng-Zen Yang)
+<br><input name="class "type ="radio" id="class" value="CS305 B">作業系統概論	葉奕成(I-CHENG YEH)
+<br><input name="class "type ="radio" id="class" value="CS309 A">演算法概論	張經略
+<br><input name="class "type ="radio" id="class" value="CS309 B">演算法概論	林基成(Ji-Cherng Lin)
+<br><input name="class "type ="radio" id="class" value="CS310 A">人工智慧概論	陳彥安
+<br><input name="class "type ="radio" id="class" value="CS312 A">ＵＮＩＸ系統概論	陳增益
+<br><input name="class "type ="radio" id="class" value="CS320 A">微處理機系統設計	陳彥安
+<br><input name="class "type ="radio" id="class" value="CS335 A">無線網路概論	陳彥安
+<br><input name="class "type ="radio" id="class" value="CS338 A">積體電路設計自動化導論	林榮彬(Rung-Bin Lin)
+<br><input name="class "type ="radio" id="class" value="CS340 A">生物資訊概論	鍾旭東
+<br><input name="class "type ="radio" id="class" value="CS346 A">醫學概論	邱彥霖(YEN-LING CHIU)、邱昱偉
+<br><input name="class "type ="radio" id="class" value="CS362 A">影像處理概論	王任瓚(Ran-Zan Wang)
+<br><input name="class "type ="radio" id="class" value="CS377 A">軟體工程	范金鳳(Chin-Feng Fan)
+<br><input name="class "type ="radio" id="class" value="CS381 A">開放平台軟體	陳柏豪
+<br><input name="class "type ="radio" id="class" value="CS382 A">敏捷軟體開發	黃國瑜
+			  <input type="submit" value="submit" id="submit" > <input type="reset" value="reset" name="reset">
+
+		</form>
+
+		
+
+	</table>
+</body>
+</html>
