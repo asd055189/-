@@ -11,6 +11,10 @@ curl_setopt($ch, CURLOPT_URL, "https://portal.yzu.edu.tw/cosSelect/Index.aspx");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_HEADER, $headers);
 $result = curl_exec($ch);
+
+preg_match('~<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="(.*?)" />~', $result, $VS);
+preg_match('~<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="(.*?)" />~', $result, $VSR);
+preg_match('~<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="(.*?)" />~', $result, $EN);
 preg_match('/Set-Cookie:(.*);/iU', $result, $str);
 curl_close($ch);
 $ASP=$str[1];
@@ -21,19 +25,21 @@ curl_setopt($ch, CURLOPT_COOKIE, $ASP);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_HEADER, $headers);
 $result = curl_exec($ch);
+
 preg_match('/Set-Cookie:(.*);/iU', $result, $matches);
 curl_close($ch);
 $code = $matches[1];
 preg_match('/[A-Z0-9]{4}/', $code, $match);
 $codeval = $match[0];
 
+
 $post = [
-   '__VIEWSTATE'=> '/wEPDwULLTEzOTMyMjE5ODAPZBYCAgMPZBYEAgIPDxYCHgRUZXh0BQ/ph43nlKLpqZforYnnorxkZAIDDw8WAh8ABQbnmbvlhaVkZGQgeASEe+V1dU8nIzVjqNX71Y3i1UbXZiJO0eLTvPVzuw==',
-   '__VIEWSTATEGENERATOR'=>'F0DFF7E6',
-   '__EVENTVALIDATION'=> '/wEdAAMV9h6Wq6ptdMNC6CWl1bQ7qsgjID72Kb7aQ5qwckjW4s34O/GfAV4V4n0wgFZHr3e5n2wt/ABHqXCmF56OI9xwezTYBln7BeuuXxxENftN9A==',
+   '__VIEWSTATE'=> $VS[1],
+   '__VIEWSTATEGENERATOR'=>$VSR[1],
+   '__EVENTVALIDATION'=> $EN[1],
    'Code'=>$codeval,
-   'uid'=>s+id,
-   'pwd'=> passwd,
+   'uid'=>'s+id',
+   'pwd'=> 'passwd',
    'Button1'=>'登入'
                            
 ];
@@ -46,6 +52,7 @@ curl_setopt($ch, CURLOPT_POSTFIELDS,$post);
 curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $output = curl_exec($ch); 
+
 curl_close($ch);
 
 $ch = curl_init();
@@ -58,7 +65,6 @@ preg_match('~<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="(.*
 preg_match('~<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="(.*?)" />~', $result, $VSR);
 preg_match('~<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="(.*?)" />~', $result, $EN);
 curl_close($ch);
-
 $post = [
    '__EVENTTARGET'=>'DDL_Dept',
    '__EVENTARGUMENT'=>'',
@@ -67,7 +73,7 @@ $post = [
    '__VIEWSTATEGENERATOR'=>$VSR[1],
    '__EVENTVALIDATION'=>$EN[1],
    'Q'=>'RadioButton1',
-   'DDL_YM'=>'108,2  ',
+   'DDL_YM'=>'109,1  ',
    'DDL_Dept'=> '304',
    'DDL_Degree'=> '0',
    'Button1'=>'確定'
@@ -92,7 +98,7 @@ $post = [
    '__VIEWSTATEGENERATOR'=>$VSR[1],
    '__EVENTVALIDATION'=>$EN[1],
    'Q'=>'RadioButton1',
-   'DDL_YM'=>'108,2  ',
+   'DDL_YM'=>'109,1  ',
    'DDL_Dept'=> '304',
    'DDL_Degree'=> '0',
    'Button1'=>'確定'
@@ -106,7 +112,7 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 $output = curl_exec($ch); 
 
-//echo $output;
+
 curl_close($ch);
 preg_match('~'.$class.'.*~', $output, $a);
 echo $a[0];
