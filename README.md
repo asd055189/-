@@ -1,4 +1,6 @@
-# 爬蟲 //Web final project
 # 測試使用，使用PHP撰寫
-# server上需要有mailserver才能執行，xampp請參考 https://stackoverflow.com/questions/15965376/how-to-configure-xampp-to-send-mail-from-localhost
-# 2020 6月因為登入系統需要驗證碼，所以需要另外辨識，請參考 https://github.com/tyzesc/Portal-OCR?fbclid=IwAR1vYYCDJX3OMdwqOqlrSPlOxQ8SetWvx6ktFxUoW12Y7CBmbbkiYIKR9Ro
+
+# server上需要有mailserver才能執行，若使用xampp架設請參考 https://stackoverflow.com/questions/15965376/how-to-configure-xampp-to-send-mail-from-localhost
+# PHP需自行更改 帳號,密碼,學期,科系預設是資工 其他也可以自己改
+(因為本來也是寫來自己用 功能沒那麼完善啦QQ)
+不會幫忙選課，只會寄信提醒
